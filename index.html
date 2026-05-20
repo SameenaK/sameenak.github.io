@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sameena Khan — Lead Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@300..700&display=swap" rel="stylesheet">
+<script>
+  // When arriving via a hash (e.g. from a project detail page), scroll instantly to the section
+  // instead of smoothly animating from the top. Smooth scroll is restored for in-page nav clicks.
+  if (window.location.hash) {
+    document.documentElement.style.scrollBehavior = 'auto';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.documentElement.style.scrollBehavior = '';
+      });
+    });
+  }
+</script>
+<style>
+:root {
+  --bg: #EFF2F3;
+  --bg-card: #FFFFFF;
+  --bg-subtle: #E4EAEC;
+  --ink: #1A2420;
+  --ink-muted: #3F4B47;
+  --ink-soft: #4F5B55;
+  --border: #DBE2E4;
+  --border-soft: #E5EAEC;
+  --sage: #8A9692;
+  --sage-deep: #1A2420;
+  --blue: #8A9692;
+  --blue-deep: #1A2420;
+  --accent: #7C3AED;
+  --accent-soft: rgba(124, 58, 237, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 64px;
+}
+
+body {
+  font-family: 'Public Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(60, 75, 70, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(60, 75, 70, 0.04) 0%, transparent 45%);
+  background-attachment: fixed;
+}
+
+::selection { background: var(--sage); color: white; }
+
+/* Subtle paper grain */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.08 0 0 0 0 0.09 0 0 0 0 0.1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  background: rgba(239, 242, 243, 0.78);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 18px 0;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.nav-links a {
+  color: var(--ink-muted);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* SECTION LABELS */
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.section-label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* HERO */
+.hero {
+  padding: 120px 0 100px;
+  position: relative;
+}
+
+.hero h1 {
+  font-family: 'Public Sans', sans-serif;
+  font-size: clamp(56px, 11vw, 132px);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  margin-bottom: 28px;
+  max-width: 980px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.hero-role {
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--ink);
+  margin-bottom: 36px;
+  max-width: 760px;
+  letter-spacing: -0.005em;
+}
+
+.hero-role em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.hero-bio {
+  max-width: 620px;
+  margin-bottom: 56px;
+}
+
+.hero-bio p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  font-weight: 400;
+}
+
+.hero-bio p + p {
+  margin-top: 1.1em;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 56px;
+  flex-wrap: wrap;
+  padding-top: 36px;
+  border-top: 1px solid var(--border);
+  max-width: 760px;
+}
+
+.hero-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hero-meta-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.hero-skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* SECTIONS */
+section { padding: 100px 0; position: relative; }
+
+.section-heading {
+  font-family: 'Public Sans', sans-serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.section-heading em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.section-intro {
+  font-size: 17px;
+  color: var(--ink-muted);
+  max-width: 540px;
+  margin-bottom: 64px;
+  line-height: 1.5;
+}
+
+/* PROJECTS */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--accent);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow:
+    0 1px 2px rgba(26, 36, 32, 0.04),
+    0 12px 32px rgba(26, 36, 32, 0.08);
+}
+
+.project-image {
+  aspect-ratio: 2 / 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-subtle);
+  margin: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hide the decorative overlay when a real image is present */
+.project-image:has(img)::after {
+  display: none;
+}
+
+.project-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(0,0,0,0.08), transparent 50%);
+}
+
+.project-content {
+  padding: 12px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.project-arrow { transition: transform 0.3s ease; }
+.project-card:hover .project-arrow { transform: translate(3px, -3px); }
+
+.project-title {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.project-desc {
+  font-size: 15px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.project-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 4px 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 100px;
+  font-weight: 500;
+}
+
+/* TESTIMONIALS */
+.testimonials {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.testimonials::before {
+  content: '"';
+  position: absolute;
+  top: 30px;
+  right: 8%;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 240px;
+  line-height: 1;
+  color: var(--sage);
+  opacity: 0.18;
+  font-style: italic;
+  pointer-events: none;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  column-gap: 32px;
+  row-gap: 56px;
+}
+
+.testimonial {
+  padding: 4px 0 4px 28px;
+  background: transparent;
+  border: none;
+  border-left: 2px solid var(--sage);
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.testimonial-quote {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 19px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  flex: 1;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.author-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Public Sans', sans-serif;
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.author-info { display: flex; flex-direction: column; }
+
+.author-name { font-weight: 600; font-size: 14px; }
+.author-title { font-size: 13px; color: var(--ink-muted); }
+
+/* EXPERIENCE */
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+.experience-item {
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  gap: 40px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+
+.experience-period {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  padding-top: 6px;
+}
+
+.experience-main h3 {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  margin-bottom: 4px;
+}
+
+.experience-company {
+  font-size: 14px;
+  color: var(--sage-deep);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.experience-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 580px;
+}
+
+.experience-bullets li {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-muted);
+  padding-left: 22px;
+  position: relative;
+}
+
+.experience-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 12px;
+  height: 1px;
+  background: var(--ink-soft);
+}
+
+.experience-location {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-top: 8px;
+}
+
+.experience-roles {
+  list-style: none;
+  padding: 18px 0 0;
+  margin: 22px 0 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.experience-roles li {
+  display: grid;
+  grid-template-columns: 200px max-content;
+  gap: 20px;
+  align-items: baseline;
+}
+
+.role-period {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+
+.role-title {
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+@media (max-width: 540px) {
+  .experience-roles li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+/* CONTACT */
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.contact-info h2 {
+  font-family: 'Public Sans', sans-serif;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+.contact-info h2 em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.hero-bio p em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.contact-info p {
+  color: var(--ink-muted);
+  font-size: 17px;
+  line-height: 1.55;
+  margin-bottom: 36px;
+}
+
+.contact-inline-link {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.contact-inline-link:hover { color: var(--accent); }
+
+.contact-form {
+  background: var(--bg-card);
+  padding: 40px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.contact-form[hidden] { display: none; }
+
+.form-success {
+  padding: 18px 0;
+  font-size: 16px;
+  color: var(--ink);
+}
+.form-success[hidden] { display: none; }
+
+.field { display: flex; flex-direction: column; gap: 8px; }
+
+.field label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.field input, .field textarea {
+  padding: 14px 0;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  transition: border-color 0.3s ease;
+  outline: none;
+}
+
+.field input:focus, .field textarea:focus { border-color: var(--sage-deep); }
+
+.field input::placeholder, .field textarea::placeholder { color: var(--ink-soft); }
+
+.field textarea { resize: vertical; min-height: 100px; font-family: 'Public Sans', sans-serif; }
+
+.submit-btn {
+  align-self: flex-start;
+  margin-top: 12px;
+  padding: 14px 32px;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: var(--sage-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26, 36, 32, 0.25);
+}
+
+.submit-btn svg { transition: transform 0.3s ease; }
+.submit-btn:hover svg { transform: translate(3px, -3px); }
+
+/* FOOTER */
+footer {
+  padding: 60px 0 40px;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 28px;
+  font-size: 13px;
+  color: var(--ink-muted);
+  align-items: center;
+}
+
+.footer-links a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--accent); }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.fade-in:nth-child(1) { animation-delay: 0.05s; }
+.fade-in:nth-child(2) { animation-delay: 0.15s; }
+.fade-in:nth-child(3) { animation-delay: 0.25s; }
+.fade-in:nth-child(4) { animation-delay: 0.35s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links { gap: 18px; }
+  .nav-links a { font-size: 13px; }
+  .hero { padding: 70px 0 60px; }
+  .hero-meta { gap: 24px; }
+  .testimonials::before { display: none; }
+  .experience-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .experience-period {
+    order: 1;
+    padding-top: 0;
+    margin-bottom: 2px;
+  }
+  .experience-location {
+    order: 2;
+    padding-top: 0;
+    margin-bottom: 18px;
+  }
+  .experience-main {
+    order: 3;
+    display: flex;
+    flex-direction: column;
+  }
+  .experience-main h3 { order: 1; }
+  .experience-company { order: 2; }
+  .experience-roles {
+    order: 3;
+    margin-top: 18px;
+    margin-bottom: 4px;
+  }
+  .experience-bullets { order: 4; margin-top: 18px; }
+  .experience-roles + .experience-bullets { margin-top: 22px; }
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .projects-grid { grid-template-columns: 1fr; }
+  .testimonials-inner { padding: 0 20px; }
+  .container { padding: 0 20px; }
+  .nav-inner { padding: 0 20px; }
+  section { padding: 70px 0; }
+  .contact-form { padding: 28px; }
+}
+
+@media (max-width: 540px) {
+  .nav-links li:nth-child(3),
+  .nav-links li:nth-child(4) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#about" class="brand" aria-label="Home">SK</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Selected Work</a></li>
+      <li><a href="#voices">Voices</a></li>
+      <li><a href="#experience">Career</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- HERO / ABOUT -->
+  <section class="hero" id="about">
+    <h1 class="fade-in">Sameena Khan</h1>
+    <p class="hero-role fade-in">Lead developer with over eight years of experience building complex digital solutions.</p>
+    <div class="hero-bio fade-in">
+      <p>I've spent the last eight years building large-scale digital solutions — primarily in the .NET stack (.NET MVC, then .NET Core), React, and TypeScript, often along with Optimizely CMS and Optimizely Customized Commerce. Much of this work has involved building and improving e-commerce flows. Beyond writing code, I serve as the main point of contact for clients, meeting with them to provide updates, clarify technical questions, and gather requirements for upcoming work.</p>
+      <p>I take pride in the high satisfaction ratings from my clients and my ability to build solutions that meet their needs. For example, a recent client gave my team a 90% happiness rating. I also take pride in recognition from peers — in 2023, I was selected as the top voted employee among a staff of 60+ for the quarterly company all-star award, recognizing excellence in client delivery and teamwork.</p>
+      <p>As a lead, I also manage technical planning and work with my team to define roadmaps and delivery timelines. I am looking to continue building impactful solutions while bringing my background in clear communication and technical leadership to a new team.</p>
+    </div>
+    <div class="hero-meta fade-in">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Skills</span>
+        <div class="hero-skill-list">
+          <span class="tag">C#</span>
+          <span class="tag">.NET MVC</span>
+          <span class="tag">.NET Core</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">React</span>
+          <span class="tag">Optimizely CMS</span>
+          <span class="tag">Optimizely Customized Commerce</span>
+          <span class="tag">Google Vertex AI Search</span>
+          <span class="tag">Google Vertex AI Search for Commerce</span>
+          <span class="tag">Claude Code</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="work">
+    <div class="section-label">Selected Work</div>
+    <h2 class="section-heading">Things I've built.</h2>
+
+    <div class="projects-grid">
+      <a href="aap-detail.html" class="project-card">
+        <div class="project-image">
+          <img src="images/AAP_Search.jpeg" alt="AAP Search interface showing a query for 'what is a fever' with the Generative AI Overview section displaying medical information about fevers">
+        </div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span>September 2025</span>
+            <svg class="project-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3 class="project-title">AAP Search Experience</h3>
+          <p class="project-desc">An AI-driven search rebuild for the American Academy of Pediatrics, built on Google Vertex AI Search and Google Vertex AI Search for Commerce. Handles 13,000+ daily queries, with generative AI summaries and suggested follow-up questions.</p>
+          <div class="project-tags">
+            <span class="tag">Google Vertex AI Search</span>
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">C#</span>
+            <span class="tag">Optimizely CMS</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="cpi-detail.html" class="project-card">
+        <div class="project-image">
+          <img src="images/CPI_event_reg.jpeg" alt="Crisis Prevention Institute event registration interface showing the program selection step with filters for industry, format, and training type; a 4-step progress indicator at the top; and a Program Summary panel on the right">
+        </div>
+        <div class="project-content">
+          <div class="project-meta">
+            <span>November 2025</span>
+            <svg class="project-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3 class="project-title">CPI Event Registration Experience</h3>
+          <p class="project-desc">A redesigned event registration flow for the Crisis Prevention Institute, built with React, TypeScript, and Optimizely CMS. Improved user experience with breadcrumbs, filtering, and a real-time summary of user selections. Winner of a 2025 Horizon Interactive Gold award.</p>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">C#</span>
+            <span class="tag">Optimizely CMS</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+</main>
+
+<!-- TESTIMONIALS (full-bleed background) -->
+<section class="testimonials" id="voices">
+  <div class="testimonials-inner">
+    <div class="section-label">What people say</div>
+    <h2 class="section-heading">Voices from collaborators.</h2>
+    <p class="section-intro">Here's what some of the people I've built with have said.</p>
+
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <div class="testimonial-quote">
+          Thank you to Sameena for your continued commitment to the CPI project. Her thoughtful planning and clear communication have been instrumental in navigating a complex and fast-moving timeline. Whether it&rsquo;s preparing code merges, technical walkthroughs, or coordinating deployments to CPI&rsquo;s environments, Sameena&rsquo;s leadership and attention to detail continue to make a major impact.
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div class="author-info">
+            <span class="author-name">Alison DeFrancisco</span>
+            <span class="author-title">Senior Project Owner &middot; Adage Technologies</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="container">
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Career</div>
+    <h2 class="section-heading">Where I've worked.</h2>
+
+    <div class="experience-list">
+      <div class="experience-item">
+        <span class="experience-period">July 2018 — June 2026</span>
+        <div class="experience-main">
+          <h3>Adage Technologies</h3>
+          <ul class="experience-bullets">
+            <li>Developed digital experiences with complex business logic using .NET Core/ASP.NET MVC, React, TypeScript, and Optimizely CMS for a portfolio of non-profit digital e-commerce clients</li>
+            <li>Interfaced with clients as their main point of contact, and on cross-functional Agile scrum teams to plan and execute projects</li>
+            <li>Received the quarterly company all-star award in 2023 for excellence in client delivery and teamwork; selected as the top-voted employee among a staff of 60+</li>
+            <li>Partnered with leadership to interview and assess candidates and finalize hiring decisions</li>
+          </ul>
+          <ul class="experience-roles">
+            <li>
+              <span class="role-period">May 2025 — June 2026</span>
+              <span class="role-title">Lead Developer</span>
+            </li>
+            <li>
+              <span class="role-period">October 2020 — May 2025</span>
+              <span class="role-title">Senior Developer</span>
+            </li>
+            <li>
+              <span class="role-period">July 2018 — October 2020</span>
+              <span class="role-title">Backend Developer</span>
+            </li>
+          </ul>
+        </div>
+        <span class="experience-location">Chicago, IL</span>
+      </div>
+
+      <div class="experience-item">
+        <span class="experience-period">2017 — 2018</span>
+        <div class="experience-main">
+          <h3>Hotplate</h3>
+          <div class="experience-company">Application Developer</div>
+          <ul class="experience-bullets">
+            <li>Developed an iOS and Android application in React Native to assist users choosing dishes at restaurants for an early-stage startup, acquiring 500+ users</li>
+            <li>Conducted user research testing and redesigned application to boost engagement</li>
+            <li>Designed, prototyped, and built an updated navigation user flow, revamped dish ratings system, and new &ldquo;Discover&rdquo; and &ldquo;Search&rdquo; pages</li>
+          </ul>
+        </div>
+        <span class="experience-location">Evanston, IL</span>
+      </div>
+
+      <div class="experience-item">
+        <span class="experience-period">Summer 2017</span>
+        <div class="experience-main">
+          <h3>JPMorgan Chase &amp; Co.</h3>
+          <div class="experience-company">Technology Analyst Program Intern</div>
+          <ul class="experience-bullets">
+            <li>Developed automation tool for change management system on DevOps team using Windows PowerShell and Jenkins, reducing time spent to generate change requests by 88%</li>
+            <li>Improved Spring RESTful web service for document retrieval by adding error handling and input validation while on an Agile team</li>
+          </ul>
+        </div>
+        <span class="experience-location">Columbus, OH</span>
+      </div>
+
+      <div class="experience-item">
+        <span class="experience-period">2014 — 2018</span>
+        <div class="experience-main">
+          <h3>Northwestern University</h3>
+          <div class="experience-company">B.A. in Computer Science</div>
+        </div>
+        <span class="experience-location">Evanston, IL</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <div class="section-label">Get in touch</div>
+        <h2>Let's collaborate.</h2>
+        <p>I'm open to new projects and roles. You can also find me on <a href="https://www.linkedin.com/in/sameena-khan" class="contact-inline-link" target="_blank" rel="noopener">LinkedIn</a>.</p>
+      </div>
+
+      <form id="contactForm" class="contact-form" action="https://formspree.io/f/mnjrjggq" method="POST">
+        <div class="field">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Doe" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="jane@company.com" required>
+        </div>
+        <div class="field">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="Project opportunity, role, or other">
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="A few sentences about what you have in mind." required></textarea>
+        </div>
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+        <button type="submit" class="submit-btn">
+          Send message
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </button>
+      </form>
+
+      <div class="form-success" id="formSuccess" hidden>
+        Thank you for reaching out! I will get back to you soon.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <span>© 2026 Sameena Khan</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Intercept anchor link clicks and scroll in-page without changing URL.
+  // This is mainly to sidestep iframe-preview quirks; anchor links work
+  // fine without this on regular hosting.
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href || href === '#' || href.length <= 1) return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      const navOffset = 64; // matches scroll-padding-top, ~nav height
+      const targetTop = target.getBoundingClientRect().top + window.pageYOffset - navOffset;
+      window.scrollTo({ top: targetTop, behavior: 'smooth' });
+    });
+  });
+</script>
+
+<script>
+  (function () {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const button = form.querySelector('.submit-btn');
+      const originalHTML = button.innerHTML;
+      button.disabled = true;
+      button.textContent = 'Sending…';
+
+      // 15s safety timeout so the button can't get permanently stuck
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' },
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        console.log('[contact form] response status:', res.status);
+        let body = null;
+        try { body = await res.json(); } catch (_) { /* non-JSON response */ }
+        console.log('[contact form] response body:', body);
+        if (!res.ok) throw new Error('Submission failed: ' + res.status);
+        form.hidden = true;
+        document.getElementById('formSuccess').hidden = false;
+        form.reset();
+      } catch (err) {
+        clearTimeout(timeoutId);
+        console.error('[contact form] error:', err);
+        button.disabled = false;
+        button.innerHTML = originalHTML;
+        const msg = err.name === 'AbortError'
+          ? 'The request timed out. Please try again, or reach me on LinkedIn.'
+          : 'Sorry — something went wrong. Please try again, or reach me on LinkedIn.';
+        alert(msg);
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

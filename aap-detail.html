@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AAP Search Experience — Sameena Khan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #EFF2F3;
+  --bg-card: #FFFFFF;
+  --bg-subtle: #E4EAEC;
+  --ink: #1A2420;
+  --ink-muted: #3F4B47;
+  --ink-soft: #4F5B55;
+  --border: #DBE2E4;
+  --border-soft: #E5EAEC;
+  --accent: #7C3AED;
+  --accent-soft: rgba(124, 58, 237, 0.12);
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Public Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+nav.site-nav {
+  position: sticky;
+  top: 0;
+  height: 64px;
+  background: rgba(239, 242, 243, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-soft);
+  z-index: 100;
+}
+
+.nav-inner {
+  height: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  transition: color 0.2s ease;
+}
+
+.brand:hover { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+.nav-links a {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.prose-container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* PROJECT HEADER */
+.project-header {
+  padding: 80px 0 0;
+}
+
+.back-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: inline-block;
+  margin-bottom: 56px;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover { color: var(--accent); }
+
+.project-title {
+  font-size: 56px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 28px;
+  max-width: 920px;
+}
+
+.project-lead {
+  font-size: 19px;
+  color: var(--ink-muted);
+  line-height: 1.6;
+  max-width: 720px;
+}
+
+/* HERO IMAGE */
+.project-hero-image {
+  margin: 80px 0;
+}
+
+.project-hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--border);
+}
+
+/* META STRIP */
+.project-details {
+  padding: 56px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 96px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 18px 40px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.details-grid dt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding-top: 4px;
+}
+
+.details-grid dd {
+  font-size: 16px;
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+.details-grid dd a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.details-grid dd a:hover { color: var(--accent); }
+
+.details-grid dd.stack-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 2px;
+}
+
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 4px 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 100px;
+  font-weight: 500;
+}
+
+/* PROJECT BODY */
+.project-body {
+  margin-bottom: 96px;
+}
+
+.project-body h2 {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin-top: 56px;
+  margin-bottom: 18px;
+  color: var(--ink);
+}
+
+.project-body h2:first-child { margin-top: 0; }
+
+.project-body p {
+  font-size: 17px;
+  color: var(--ink-muted);
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.placeholder-text {
+  color: var(--ink-soft);
+  font-style: normal;
+  background: var(--bg-subtle);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 0.95em;
+}
+
+/* TODO note — visible working note, remove before deployment */
+.todo-note {
+  border: 1px dashed var(--accent);
+  background: rgba(124, 58, 237, 0.04);
+  padding: 16px 20px;
+  margin: 0 0 36px 0;
+  border-radius: 4px;
+}
+
+.todo-note-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.todo-note ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 14px;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+/* IMAGE GALLERY */
+.project-gallery {
+  margin-bottom: 96px;
+}
+
+.gallery-figure {
+  margin-bottom: 56px;
+}
+
+.project-gallery > *:last-child { margin-bottom: 0; }
+
+.gallery-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--border);
+}
+
+/* Mobile/portrait screenshots — constrained width, centered */
+.gallery-figure.mobile {
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gallery-figure figcaption {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 14px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  padding-left: 4px;
+  margin-top: 14px;
+}
+
+.gallery-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: block;
+  margin-bottom: 14px;
+  padding-left: 4px;
+}
+
+/* Pair of mobile screenshots side-by-side on desktop */
+.gallery-mobile-pair {
+  display: flex;
+  gap: 48px;
+  justify-content: flex-start;
+  margin-bottom: 56px;
+}
+
+.gallery-mobile-pair .gallery-figure {
+  margin: 0;
+  flex: 0 1 360px;
+  min-width: 0;
+}
+
+/* FOOTER */
+footer.site-footer {
+  padding: 48px 0 64px;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 13px;
+  border-top: 1px solid var(--border);
+  font-family: 'Public Sans', sans-serif;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .nav-links { gap: 18px; }
+  .nav-links a { font-size: 13px; }
+  .container { padding: 0 20px; }
+  .nav-inner { padding: 0 20px; }
+  .project-header { padding-top: 56px; }
+  .back-link { margin-bottom: 36px; }
+  .project-title { font-size: 36px; }
+  .project-lead { font-size: 17px; }
+  .project-hero-image { 
+    margin: 48px 0;
+  }
+  .project-details { padding: 36px 0; margin-bottom: 64px; }
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 4px 0;
+  }
+  .details-grid dt { padding-top: 16px; }
+  .details-grid dt:first-child { padding-top: 0; }
+  .project-body { margin-bottom: 64px; }
+  .project-body h2 { font-size: 22px; margin-top: 40px; }
+  .project-body p { font-size: 16px; }
+  .project-gallery { margin-bottom: 64px; }
+  .gallery-figure { margin-bottom: 36px; }
+  .gallery-mobile-pair {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 36px;
+    margin-bottom: 36px;
+  }
+  .gallery-mobile-pair .gallery-figure {
+    flex: 0 1 auto;
+    width: 100%;
+    max-width: none;
+  }
+  .gallery-figure.mobile {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">SK</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#work">Selected Work</a></li>
+      <li><a href="index.html#voices">Voices</a></li>
+      <li><a href="index.html#experience">Career</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+
+  <header class="project-header">
+    <a href="index.html#work" class="back-link">← Selected Work</a>
+    <h1 class="project-title">AAP Search Experience</h1>
+    <p class="project-lead">An AI-driven search rebuild for the American Academy of Pediatrics, built on Google Vertex AI Search and Google Vertex AI Search for Commerce. Handles 13,000+ daily queries, with generative AI summaries and suggested follow-up questions.</p>
+  </header>
+
+  <figure class="project-hero-image">
+    <img src="images/AAP_Search.jpeg" alt="AAP Search interface showing a query for 'what is a fever' with the Generative AI Overview section displaying medical information about fevers">
+  </figure>
+
+  <section class="project-details">
+    <dl class="details-grid">
+      <dt>Client</dt>
+      <dd>American Academy of Pediatrics</dd>
+      <dt>Role</dt>
+      <dd>Lead Developer</dd>
+      <dt>Date</dt>
+      <dd>September 2025</dd>
+      <dt>Skills</dt>
+      <dd class="stack-pills">
+        <span class="tag">Google Vertex AI Search</span>
+        <span class="tag">React</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">C#</span>
+        <span class="tag">Optimizely CMS</span>
+      </dd>
+      <dt>Visit</dt>
+      <dd><a href="https://www.aap.org/en/search" target="_blank" rel="noopener">aap.org/en/search &rarr;</a></dd>
+    </dl>
+  </section>
+
+  <section class="project-body prose-container">
+    <p>Building the new search experience for the American Academy of Pediatrics was both challenging and rewarding. We moved away from a keyword-based search implementation to one that brought AAP a &ldquo;Google-quality&rdquo; search using Google Vertex AI Search and Google Vertex AI Search for Commerce. Google Vertex AI Search uses semantic search to understand what the user is actually asking, instead of relying on matching keywords. It also provides additional features like a generative AI overview to give users information quickly, grounded with citations, and suggested follow up questions to help users get to the information they need. We found that search result quality improved drastically with this new implementation.</p>
+
+    <p>For the e-commerce experience, Google Vertex Search for Commerce allows users to find products quickly, filter results, and view recommendations based on their past behavior.</p>
+
+    <p>This project was a first both for myself and my company. As the lead developer, I dove into learning about Google Vertex AI Search. It was challenging to gather information, navigating a maze of documentation and rapid feature updates.</p>
+
+    <p>We began with a research and development phase, where I focused on identifying what Google Vertex AI Search could do, and I worked with my team to build a proof of concept to demonstrate this. After that, I worked with our design team to ensure that we designed an updated search experience that is tailored to the features Google Vertex AI Search offers.</p>
+
+    <p>Lastly, we entered development to bring this to life. We built the new search page using React and TypeScript. The backend included a new page using Optimizely CMS as well as C# Web API controllers that used Google&rsquo;s SDKs to interact with Google Vertex AI Search and send data to the new React application.</p>
+
+    <p>The new search provides an updated experience to the Academy&rsquo;s 67,000 members. It supports 13,000+ daily queries from 1000+ daily users.</p>
+  </section>
+
+  <section class="project-gallery">
+    <figure class="gallery-figure">
+      <span class="gallery-label">Desktop</span>
+      <img src="images/AAP_overview_detail.png" alt="Generative AI Overview expanded view showing the AI summary, four citation source cards with article titles and URLs, and related questions at the bottom">
+      <figcaption>The search page provides users with a Generative AI overview with cited sources, as well as suggested follow up questions.</figcaption>
+    </figure>
+    <figure class="gallery-figure">
+      <span class="gallery-label">Desktop</span>
+      <img src="images/AAP_shop.png" alt="shopAAP search results page showing filter options on the left and a product result for 2025 PREP The Curriculum with pricing details">
+      <figcaption>The product search uses Google Vertex AI Search for Commerce. It includes facets and filtering.</figcaption>
+    </figure>
+    <span class="gallery-label gallery-label-pair">Mobile</span>
+    <div class="gallery-mobile-pair">
+      <figure class="gallery-figure mobile">
+        <img src="images/AAP_mobile_home.png" alt="Mobile view of AAP Search homepage with search query 'what is a fever' and the Generative AI Overview beginning below">
+        <figcaption>Mobile search experience, highlighting the generative AI overview.</figcaption>
+      </figure>
+      <figure class="gallery-figure mobile">
+        <img src="images/AAP_mobile_results.png" alt="Mobile view of Healthy Children content results showing related question pill buttons at the top and an article preview card below">
+        <figcaption>Mobile search experience, highlighting the suggested follow up questions and search results.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  © 2026 Sameena Khan
+</footer>
+
+</body>
+</html>
